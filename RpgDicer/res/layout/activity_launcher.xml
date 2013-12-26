@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Launcher" >
-
+    
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="wrap_content"
@@ -39,15 +39,20 @@
         android:padding="8dp"
         android:onClick="generate"
         android:text="@string/generateBtn" />
-
+    
+    
+    <ScrollView 
+	 	android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_alignLeft="@+id/textView1"
+	    android:layout_below="@+id/spinner1">
+    
     <RelativeLayout
         android:id="@+id/resultLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/spinner1"
         >
-        
+               
         <TextView 
             android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
@@ -78,5 +83,6 @@
             android:text="@string/Critical"/>        
         
     </RelativeLayout>
-
+    </ScrollView>
+    
 </RelativeLayout>

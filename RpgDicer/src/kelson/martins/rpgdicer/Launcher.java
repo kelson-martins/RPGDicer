@@ -4,7 +4,9 @@ import java.util.Random;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +19,7 @@ public class Launcher extends Activity {
 	static int diceNumber = 0;
 	static int success = 0;
 	static int critical = 0;
+	static int diceMaxNumber = 40;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -28,9 +31,9 @@ public class Launcher extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
-		Integer items[] = new Integer[20];
+		Integer items[] = new Integer[40];
 	    
-		for (Integer nI = 0; nI <= 19 ; nI++) {
+		for (Integer nI = 0; nI <= 39 ; nI++) {
 			items[nI] = nI+1;
 		}
 		
@@ -54,6 +57,21 @@ public class Launcher extends Activity {
 		return true;
 	}
 	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch(item.getItemId()) {
+	    case R.id.action_about:
+	        Intent intent = new Intent(this, AboutActivity.class);
+	        this.startActivity(intent);
+	        break;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
+
+	    return true;
+	}
+	
 	/** Called when the user touches the button */
 	public void generate(View view) {
 		TextView r = new TextView(this);
@@ -68,7 +86,7 @@ public class Launcher extends Activity {
 	     
 
 	    c=(TextView)findViewById(R.id.critical); 
-	    c.setText("Critical: " + String.valueOf(critical));	    
+	    c.setText("Critical Failure: " + String.valueOf(critical));	    
 	}
 	
 	public String returnResult(int diceNumbers) {
@@ -78,7 +96,7 @@ public class Launcher extends Activity {
 		
 		Random random = new Random();
 		
-		int results[] = new int[20];
+		int results[] = new int[40];
 		
 		for (int nI = 0; nI < diceNumbers; nI++) {
 			results[nI] = random.nextInt(diceMax) + 1;
@@ -87,7 +105,7 @@ public class Launcher extends Activity {
 				critical++;
 			}
 			
-			if(results[nI] > 8) {
+			if(results[nI] >= 8) {
 				success++;
 			}			
 		}
@@ -96,7 +114,7 @@ public class Launcher extends Activity {
 			toReturn += String.valueOf(results[nI]);
 			
 			if (!(nI + 1 == diceNumbers)) {
-				toReturn += " / ";
+				toReturn += " - ";
 			}
 			
 		}
