@@ -3,7 +3,7 @@
 
     <string name="app_name">RPG Dicer</string>
     <string name="action_about">About</string>
-    <string name="diceNumbers">Dice Numbers</string>
+    <string name="diceNumbers">Dices Number</string>
     <string name="generateBtn">Generate</string>
     <string name="result"></string>
     <string name="Sucess"></string>
