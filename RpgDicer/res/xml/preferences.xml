@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ListPreference 
+        android:key="pref_fail"
+        android:title="@string/pref_fail_title"
+        android:summary="@string/pref_fail_summary"
+        android:defaultValue="@string/pref_fail_default"
+        android:dialogTitle="@string/pref_fail_title"
+        android:entryValues="@array/arrayFail"
+        android:entries="@array/arrayFail"/>
+    
+    <ListPreference 
+        android:key="pref_success"
+        android:title="@string/pref_success_title"
+        android:summary="@string/pref_success_summary"
+        android:defaultValue="@string/pref_success_default"
+        android:dialogTitle="@string/pref_success_title"
+        android:entryValues="@array/arraySuccess"
+        android:entries="@array/arraySuccess"/>    
+    
+
+</PreferenceScreen>

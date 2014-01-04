@@ -3,8 +3,10 @@ package kelson.martins.rpgdicer;
 import java.util.Random;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,20 +14,37 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Launcher extends Activity {
-
+	
 	static int diceMax = 10;
 	static int diceNumber = 0;
 	static int success = 0;
 	static int critical = 0;
 	static int diceMaxNumber = 40;
-	
+	private SharedPreferences prefs;
+	private int maxFail = 1;
+	private int minSucess = 8;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);			
-		
+		PreferenceManager.setDefaultValues(this,R.xml.preferences,false);
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		maxFail = Integer.parseInt(prefs.getString("pref_fail", "1"));
+		minSucess = Integer.parseInt(prefs.getString("pref_success", "8")); 
 		setContentView(R.layout.activity_launcher);
 	}
+
+	
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();		
+		maxFail = Integer.parseInt(prefs.getString("pref_fail", "1"));
+		minSucess = Integer.parseInt(prefs.getString("pref_success", "8")); 
+	}
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,11 +79,16 @@ public class Launcher extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
 	    switch(item.getItemId()) {
 	    case R.id.action_about:
-	        Intent intent = new Intent(this, AboutActivity.class);
+	        intent = new Intent(this, AboutActivity.class);
 	        this.startActivity(intent);
 	        break;
+	    case R.id.action_settings:
+	        intent = new Intent(this, SettingsActivity.class);
+	        this.startActivity(intent);
+	        break;	    
 	    default:
 	        return super.onOptionsItemSelected(item);
 	    }
@@ -105,11 +129,11 @@ public class Launcher extends Activity {
 		for (int nI = 0; nI < diceNumbers; nI++) {
 			results[nI] = random.nextInt(diceMax) + 1;
 			
-			if(results[nI] == 1) {
+			if(results[nI] <= maxFail) {
 				critical++;
 			}
 			
-			if(results[nI] >= 8) {
+			if(results[nI] >= minSucess) {
 				success++;
 			}			
 		}

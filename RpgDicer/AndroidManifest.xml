@@ -24,7 +24,11 @@
         </activity>
         <activity
             android:name="kelson.martins.rpgdicer.AboutActivity"
-            android:label="@string/title_activity_about" >
+            android:label="@string/settingsTitle" >
+        </activity>
+        <activity
+            android:name="kelson.martins.rpgdicer.SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 
